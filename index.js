@@ -5,8 +5,6 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const cookieParser = require('cookie-parser');
-const path = require('path');
-const session = require('express-session')
 const bodyParser = require('body-parser')
 
 app.use(express.json()); // Parse Json data from body
@@ -14,24 +12,13 @@ app.use(cookieParser());// Parse cookies data read
 // app.use(express.urlencoded({ extended: true }));// Parse URL-Encoded body
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use(express.static('./public'));
-// Set EJS view engine and path
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
 // extract style and scripts from sub pages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
-
-// Set up session middleware
-app.use(
-    session({
-        secret: 'ss',
-        resave: false,
-        saveUninitialized: true
-    })
-);
 
 //Routers
 app.use('/', require('./routes/seller'));
