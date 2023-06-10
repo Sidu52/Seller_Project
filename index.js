@@ -16,7 +16,7 @@ app.use(cookieParser());// Parse cookies data read
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());// Resourse Sharing in two server
-
+app.use(express.static('./public'));
 // Set EJS view engine and path
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -30,7 +30,7 @@ app.use(
     session({
         secret: 'ss',
         resave: false,
-        saveUninitialized: true
+        // saveUninitialized: true
     })
 );
 
