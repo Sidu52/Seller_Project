@@ -3,7 +3,7 @@ const route = express.Router();
 
 const { getDashboard, store, addInventory, sellerInventory } = require('../controller/dashbordController');
 route.get('/', getDashboard);
-route.get('/:id', sellerInventory);
+route.get('/sellerinventory/:id', sellerInventory);
 route.post('/storeInfo', store);
 route.post('/addInventory', addInventory);
 

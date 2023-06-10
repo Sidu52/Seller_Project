@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seller Page</title>
+  <link rel="stylesheet" type="text/css" href="/css/sellerinventory.css">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span class="business-name"><%= seller.businessName %></span>
+    </div>
+    <div class="navbar-center">
+       <input type="text" id="searchInput" name="searchQuery" placeholder="Search..." oninput="filterItems()">  
+    </div>
+    <div class="navbar-right">
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+
+  <div class="item-container">
+    <h2 style="text-align: center;" >Items Uploaded by <%= seller.businessName %></h2>
+    <ul class="item-list">
+        <% inventory.map((item)=>{
+            %>
+                <li class="item">
+                  <img src="<%= item.images %>" alt="<%= item.productName %>">
+                  <p>Category: <%= item.category %></p>
+                  <p>Subcategory: <%= item.subCategory %></p>
+                  <p>Product Name: <%= item.productName %></p>
+                  <p>MRP: <%= item.mrp %></p>
+                  <p>Selling Price: <%= item.sp %></p>
+                  <p>Quantity: <%= item.quantity %></p>
+                </li>
+              <% 
+        }) %>
+    </ul>
+  </div>
+
+  <script>
+    function filterItems() {
+      var input = document.getElementById("searchInput").value.toLowerCase();
+      var items = document.getElementsByClassName("item");
+
+      for (var i = 0; i < items.length; i++) {
+        var productName = items[i].querySelector("p:nth-of-type(3)").textContent.toLowerCase();
+        if (productName.includes(input)) {
+          items[i].classList.remove("hidden");
+        } else {
+          items[i].classList.add("hidden");
+        }
+      }
+    }
+  </script>
+</body>
+</html>

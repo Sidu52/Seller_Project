@@ -6,7 +6,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const cors = require('cors');
 const session = require('express-session')
 const bodyParser = require('body-parser')
 
@@ -15,8 +14,8 @@ app.use(cookieParser());// Parse cookies data read
 // app.use(express.urlencoded({ extended: true }));// Parse URL-Encoded body
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());// Resourse Sharing in two server
 
+app.use(express.static('./public'));
 // Set EJS view engine and path
 app.set('view engine', 'ejs');
 app.set('views', './views');
@@ -35,8 +34,8 @@ app.use(
 );
 
 //Routers
-app.use('/seller', require('./routes/seller'));
-app.use('/', require('./routes/dashbord'));
+app.use('/', require('./routes/seller'));
+app.use('/seller', require('./routes/dashbord'));
 
 
 // Server Start
